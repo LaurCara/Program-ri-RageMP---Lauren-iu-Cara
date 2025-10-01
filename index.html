@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Programări RAGE:MP</title>
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root {
+      --bg:#0a0a0e; --bg2:#0f0f16; --card:#12121a; --gold:#d4af37; --gold-2:#f0d98a;
+      --text:#f1f1f3; --muted:#a3a3b2; --error:#ff6b6b; --ok:#29d47a; --line:#1f2030;
+    }
+    * { box-sizing: border-box }
+    html,body { height:100% }
+    body {
+      margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial;
+      color:var(--text); background: radial-gradient(1200px 600px at 20% -10%, #15151f, transparent),
+                       radial-gradient(1000px 500px at 100% 0%, #11111a, transparent),
+                       linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    .wrap { max-width:720px; margin:56px auto; padding:0 18px }
+    .card {
+      background:linear-gradient(180deg, #111119, #0f0f17);
+      border:1px solid var(--line); border-radius:18px; padding:26px 22px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12);
+      position:relative; overflow:hidden;
+    }
+    .glow {
+      position:absolute; inset:-1px; pointer-events:none; border-radius:18px;
+      box-shadow: 0 0 140px 20px rgba(212,175,55,.08);
+    }
+    .brand { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .brand .dot { width:10px; height:10px; border-radius:50%;
+                  background:radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold)); }
+    .brand span { color:var(--gold); font-weight:800; letter-spacing:.4px; }
+    h1 { margin:0 0 6px; font-size:28px; }
+    p.lead { margin:0 0 18px; color:var(--muted) }
+
+    form { display:grid; gap:14px; }
+    .row { display:grid; gap:14px }
+    @media (min-width:640px){ .row { grid-template-columns:1fr 1fr } }
+
+    label { display:block; font-size:13px; color:var(--muted); margin:0 0 6px; }
+    input, textarea {
+      width:100%; background:#0e0e16; color:var(--text);
+      border:1px solid #202132; border-radius:12px; padding:12px 14px; outline:none;
+      transition:border .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus {
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(212,175,55,.18);
+    }
+    textarea { resize:vertical; min-height:110px }
+
+    .btn {
+      margin-top:4px; padding:12px 16px; border:0; border-radius:12px; font-weight:700;
+      background:linear-gradient(180deg, var(--gold-2), var(--gold));
+      color:#1a1405; cursor:pointer;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,.15), 0 6px 22px rgba(212,175,55,.25);
+    }
+    .btn:disabled { opacity:.6; cursor:not-allowed }
+
+    .note { font-size:12.5px; color:var(--muted); margin-top:2px }
+    .alert { display:none; margin-top:10px; border:1px solid; border-radius:12px; padding:12px 14px; font-weight:600 }
+    .alert.ok { border-color:var(--ok); color:var(--ok); background:rgba(41,212,122,.07) }
+    .alert.err{ border-color:var(--error); color:var(--error); background:rgba(255,107,107,.08) }
+
+    footer { text-align:center; margin-top:14px; color:var(--muted); font-size:12px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="glow"></div>
+      <div class="brand">
+        <div class="dot"></div><span>Programări • RAGE:MP</span>
+      </div>
+      <h1>Formular programare</h1>
+      <p class="lead">Completează datele. După trimitere, vei vedea confirmarea pe această pagină.</p>
+
+      <form id="progForm" novalidate>
+        <div class="row">
+          <div>
+            <label for="id">ID (server)</label>
+            <input id="id" name="id" required placeholder="ex: 12345" inputmode="numeric" />
+          </div>
+          <div>
+            <label for="nume_ic">Nume IC (în joc)</label>
+            <input id="nume_ic" name="nume_ic" required placeholder="ex: John Doe" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="discord">Discord</label>
+            <input id="discord" name="discord" required placeholder="ex: Yusuf#7777 sau ID" />
+          </div>
+          <div>
+            <label for="telefon">Număr de telefon</label>
+            <input id="telefon" name="telefon" placeholder="ex: 07xx xxx xxx" />
+          </div>
+        </div>
+
+        <div>
+          <label for="mentiuni">Mențiuni</label>
+          <textarea id="mentiuni" name="mentiuni" placeholder="Detalii (rol, interval orar, preferințe etc.)"></textarea>
+        </div>
+
+        <!-- honeypot anti-spam -->
+        <input type="text" id="website" name="website" autocomplete="off" style="display:none">
+
+        <button id="submitBtn" class="btn" type="submit">Finalizează</button>
+
+        <div id="ok"  class="alert ok">
+          Felicitări, ai fost programat cu succes. Te rog frumos să mă aștepți să te contactez.
+        </div>
+        <div id="err" class="alert err">
+          A apărut o eroare la înregistrare. Încearcă din nou sau contactează staff.
+        </div>
+
+        <div class="note">Prin trimitere, ești de acord ca datele să fie folosite pentru programări pe server.</div>
+      </form>
+    </div>
+
+    <footer>© RAGE:MP — programări</footer>
+  </div>
+
+  <script>
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zSxWGFYy7BK1vcbQzlVS8EHGT0vSnUKREW58uyKVc87yxYaIEi0jIz67XLgz/exec";
+
+    const form = document.getElementById('progForm');
+    const ok   = document.getElementById('ok');
+    const err  = document.getElementById('err');
+    const btn  = document.getElementById('submitBtn');
+
+    function show(el, on){ el.style.display = on ? 'block' : 'none' }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      show(ok,false); show(err,false);
+
+      // honeypot: dacă botul completează câmpul ascuns, nu trimitem
+      if (document.getElementById('website').value) return;
+
+      // validări simple
+      if (!form.id.value.trim() || !form.nume_ic.value.trim() || !form.discord.value.trim()){
+        show(err,true); err.textContent = "Completează câmpurile obligatorii."; return;
+      }
+
+      btn.disabled = true;
+
+      // trimitem ca x-www-form-urlencoded — compatibil cu Apps Script fără CORS preflight
+      const body = new URLSearchParams(new FormData(form)).toString();
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body
+        });
+
+        // acceptăm TEXT (mesajul personalizat) sau JSON fallback
+        let text = await res.text();
+        const successPhrase = "Felicitări, ai fost programat cu succes";
+
+        if (res.ok && (text.includes(successPhrase) || text.trim() === "")) {
+          show(ok,true);
+          form.reset();
+        } else {
+          // dacă e JSON de forma {ok:true,...}
+          try {
+            const j = JSON.parse(text);
+            if (j.ok) { show(ok,true); form.reset(); }
+            else { show(err,true); }
+          } catch {
+            show(err,true);
+          }
+        }
+      } catch (_) {
+        show(err,true);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
