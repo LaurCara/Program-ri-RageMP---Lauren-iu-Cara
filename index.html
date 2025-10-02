@@ -27,6 +27,32 @@
     <button type="submit">Trimite</button>
   </form>
 
+<h1>Formular programări</h1>
+<form id="programariForm">
+  <!-- ID (obligatoriu) -->
+  <label for="id">ID</label>
+  <input id="id" name="id" type="text" required><br><br>
+
+  <!-- Nume IC (obligatoriu) -->
+  <label for="nume_ic">Nume IC</label>
+  <input id="nume_ic" name="nume_ic" type="text" required><br><br>
+
+  <!-- Discord (obligatoriu) -->
+  <label for="discord">Discord</label>
+  <input id="discord" name="discord" type="text" required><br><br>
+
+  <!-- Telefon (obligatoriu) -->
+  <label for="telefon">Telefon</label>
+  <input id="telefon" name="telefon" type="text" required><br><br>
+
+  <!-- Mențiuni (opțional) -->
+  <label for="mentiuni">Mențiuni</label>
+  <textarea id="mentiuni" name="mentiuni"></textarea><br><br>
+
+  <button type="submit">Trimite</button>
+</form>
+
+  
   <script>
     // <<< PUNE AICI URL-UL TAU /exec DE LA APPS SCRIPT >>>
     const ENDPOINT = "https://script.google.com/macros/s/AKfycbxzV0NdsJ9sITepxCMKrUzRWqGCXf_kyZ_Zv-wvE7jHg-zK2aYgFNNKI7jI4t7UZLpo/exec";
@@ -62,4 +88,5 @@
   </script>
 </body>
 </html>
+
 
