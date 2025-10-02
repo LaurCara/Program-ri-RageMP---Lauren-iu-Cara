@@ -1,36 +1,53 @@
-<form id="programariForm">
-  <!-- ID (obligatoriu) -->
-  <input id="id" name="id" type="text" placeholder="ID joc" required>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Programări</title>
+</head>
+<body>
+  <h1>Formular programări</h1>
 
-  <!-- Nume IC (obligatoriu) -->
-  <input id="nume" name="nume" type="text" placeholder="Nume IC" required>
+  <form id="programariForm">
+    <label for="id">ID</label><br/>
+    <input id="id" name="id" type="text" required /><br/><br/>
 
-  <!-- Discord (obligatoriu) -->
-  <input id="discord" name="discord" type="text" placeholder="Discord" required>
+    <label for="nume">Nume IC</label><br/>
+    <input id="nume" name="nume" type="text" required /><br/><br/>
 
-  <!-- Telefon (obligatoriu) -->
-  <input id="telefon" name="telefon" type="tel" placeholder="Telefon" required>
+    <label for="discord">Discord</label><br/>
+    <input id="discord" name="discord" type="text" required /><br/><br/>
 
-  <!-- Mențiuni (opțional) -->
-  <textarea id="mentiuni" name="mentiuni" placeholder="Mențiuni"></textarea>
+    <label for="telefon">Telefon</label><br/>
+    <input id="telefon" name="telefon" type="text" required /><br/><br/>
 
-  <button type="submit">Trimite</button>
-</form>
+    <label for="mentiuni">Mențiuni</label><br/>
+    <textarea id="mentiuni" name="mentiuni" required></textarea><br/><br/>
 
+    <button type="submit">Trimite</button>
+  </form>
 
   <script>
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zS.../exec"; // pune linkul web app de la Google Script
+    // <<< PUNE AICI URL-UL TAU /exec DE LA APPS SCRIPT >>>
+    const ENDPOINT = "PUNE_AICI_LINKUL_TAU_EXEC";
 
     document.getElementById("programariForm").addEventListener("submit", async function (ev) {
       ev.preventDefault();
 
+      // CITIRE CONSISTENTĂ (aceleași id + name ca în inputs)
       const data = {
-        id:       document.getElementById("id").value,
-        nume_ic:  document.getElementById("nume_").value,
-        discord:  document.getElementById("discord").value,
-        telefon:  document.getElementById("telefon").value,
-        mentiuni: document.getElementById("mentiuni").value
+        id:       document.getElementById("id").value.trim(),
+        nume:     document.getElementById("nume").value.trim(),
+        discord:  document.getElementById("discord").value.trim(),
+        telefon:  document.getElementById("telefon").value.trim(),
+        mentiuni: document.getElementById("mentiuni").value.trim()
       };
+
+      // validare minimă
+      if (!data.id || !data.nume || !data.discord) {
+        alert("Completează ID, Nume IC și Discord.");
+        return;
+      }
 
       await fetch(ENDPOINT, {
         method: "POST",
@@ -39,10 +56,9 @@
         body: new URLSearchParams(data)
       });
 
-      alert("Felicitări, ai fost programat cu succes!");
+      alert("Felicitări, ai fost programat cu succes. Te rog frumos să mă aștepți să te contactez.");
       this.reset();
     });
   </script>
 </body>
 </html>
-
