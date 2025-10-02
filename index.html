@@ -1,36 +1,22 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formular Programări</title>
-</head>
-<body>
-  <h1>Formular programări</h1>
+<form id="programariForm">
+  <!-- ID (obligatoriu) -->
+  <input id="id" name="id" type="text" placeholder="ID joc" required>
 
-  <form id="programariForm">
-    <!-- ID -->
-    <label for="id">ID:</label><br>
-    <input id="id" name="id" type="text" required><br><br>
+  <!-- Nume IC (obligatoriu) -->
+  <input id="nume" name="nume" type="text" placeholder="Nume IC" required>
 
-    <!-- Nume IC -->
-    <label for="nume_ic">Nume IC:</label><br>
-    <input id="nume_ic" name="nume_ic" type="text" required><br><br>
+  <!-- Discord (obligatoriu) -->
+  <input id="discord" name="discord" type="text" placeholder="Discord" required>
 
-    <!-- Discord -->
-    <label for="discord">Discord:</label><br>
-    <input id="discord" name="discord" type="text" required><br><br>
+  <!-- Telefon (obligatoriu) -->
+  <input id="telefon" name="telefon" type="tel" placeholder="Telefon" required>
 
-    <!-- Telefon -->
-    <label for="telefon">Telefon:</label><br>
-    <input id="telefon" name="telefon" type="tel" required><br><br>
+  <!-- Mențiuni (opțional) -->
+  <textarea id="mentiuni" name="mentiuni" placeholder="Mențiuni"></textarea>
 
-    <!-- Mențiuni -->
-    <label for="mentiuni">Mențiuni:</label><br>
-    <textarea id="mentiuni" name="mentiuni" required></textarea><br><br>
+  <button type="submit">Trimite</button>
+</form>
 
-    <button type="submit">Trimite</button>
-  </form>
 
   <script>
     const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zS.../exec"; // pune linkul web app de la Google Script
@@ -40,7 +26,7 @@
 
       const data = {
         id:       document.getElementById("id").value,
-        nume_ic:  document.getElementById("nume_ic").value,
+        nume_ic:  document.getElementById("nume_").value,
         discord:  document.getElementById("discord").value,
         telefon:  document.getElementById("telefon").value,
         mentiuni: document.getElementById("mentiuni").value
@@ -59,3 +45,4 @@
   </script>
 </body>
 </html>
+
