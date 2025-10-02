@@ -1,3 +1,25 @@
+<body>
+  <h1>Formular programări</h1>
+
+  <form id="programariForm">
+    <label for="id">ID:</label>
+    <input id="id" name="id" type="text" required><br><br>
+
+    <label for="nume_ic">Nume IC:</label>
+    <input id="nume_ic" name="nume_ic" type="text" required><br><br>
+
+    <label for="discord">Discord:</label>
+    <input id="discord" name="discord" type="text" required><br><br>
+
+    <label for="telefon">Telefon:</label>
+    <input id="telefon" name="telefon" type="tel" required><br><br>
+
+    <label for="mentiuni">Mențiuni:</label>
+    <textarea id="mentiuni" name="mentiuni" required></textarea><br><br>
+
+    <button type="submit">Trimite</button>
+  </form>
+  
 <script>
   const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zSxWGFYy7BK1vcbQzlVS8EHGT0vSnUKREW58uyKVc87yxYaIEi0jIz67XLgz/exec";
 
@@ -5,10 +27,11 @@
     ev.preventDefault();
 
     const data = {
-      nume:    document.getElementById("nume").value,
+      nume:    document.getElementById("nume_ic").value,
       telefon: document.getElementById("telefon").value,
       discord: document.getElementById("discord").value,
-      id:      document.getElementById("id").value
+      id:      document.getElementById("id").value,
+      mentiuni: document.getElementById("mentiuni").value
     };
 
     // IMPORTANT: x-www-form-urlencoded + no-cors → e.parameter in doPost
@@ -23,3 +46,4 @@
     this.reset();
   });
 </script>
+
