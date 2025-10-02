@@ -1,49 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formular Programări</title>
+</head>
 <body>
   <h1>Formular programări</h1>
 
   <form id="programariForm">
-    <label for="id">ID:</label>
+    <!-- ID -->
+    <label for="id">ID:</label><br>
     <input id="id" name="id" type="text" required><br><br>
 
-    <label for="nume_ic">Nume IC:</label>
+    <!-- Nume IC -->
+    <label for="nume_ic">Nume IC:</label><br>
     <input id="nume_ic" name="nume_ic" type="text" required><br><br>
 
-    <label for="discord">Discord:</label>
+    <!-- Discord -->
+    <label for="discord">Discord:</label><br>
     <input id="discord" name="discord" type="text" required><br><br>
 
-    <label for="telefon">Telefon:</label>
+    <!-- Telefon -->
+    <label for="telefon">Telefon:</label><br>
     <input id="telefon" name="telefon" type="tel" required><br><br>
 
-    <label for="mentiuni">Mențiuni:</label>
+    <!-- Mențiuni -->
+    <label for="mentiuni">Mențiuni:</label><br>
     <textarea id="mentiuni" name="mentiuni" required></textarea><br><br>
 
     <button type="submit">Trimite</button>
   </form>
-  
-<script>
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zSxWGFYy7BK1vcbQzlVS8EHGT0vSnUKREW58uyKVc87yxYaIEi0jIz67XLgz/exec";
 
-  document.getElementById("programariForm").addEventListener("submit", async function (ev) {
-    ev.preventDefault();
+  <script>
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwSDib9zS.../exec"; // pune linkul web app de la Google Script
 
-    const data = {
-      nume:    document.getElementById("nume_ic").value,
-      telefon: document.getElementById("telefon").value,
-      discord: document.getElementById("discord").value,
-      id:      document.getElementById("id").value,
-      mentiuni: document.getElementById("mentiuni").value
-    };
+    document.getElementById("programariForm").addEventListener("submit", async function (ev) {
+      ev.preventDefault();
 
-    // IMPORTANT: x-www-form-urlencoded + no-cors → e.parameter in doPost
-    await fetch(ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(data)
+      const data = {
+        id:       document.getElementById("id").value,
+        nume_ic:  document.getElementById("nume_ic").value,
+        discord:  document.getElementById("discord").value,
+        telefon:  document.getElementById("telefon").value,
+        mentiuni: document.getElementById("mentiuni").value
+      };
+
+      await fetch(ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data)
+      });
+
+      alert("Felicitări, ai fost programat cu succes!");
+      this.reset();
     });
-
-    alert("Felicitări, ai fost programat cu succes. Te rog frumos să mă aștepți să te contactez.");
-    this.reset();
-  });
-</script>
-
+  </script>
+</body>
+</html>
